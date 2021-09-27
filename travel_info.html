@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image" href="{% static 'logo/logo.png' %}">
+</head>
+<body>
+    <div class="container">
+        <form action="" onsubmit="return validate()" enctype="multipart/form-data" method="POST" class = "border border-1" style="margin-top: 10px; border-radius: 10px;">
+            <div class="container-fluid" style="background-color: #999999; padding: 30px; border-radius: 10px;">
+                <div class="row">
+                    <h5 class="page-header text-center">Travel History</h5>
+                    <h6>Details of places visited for the last 14 days.</h6>
+                </div>
+            </div>
+            <table id="tbl">
+                <thead>
+                    <tr style="background-color: #E5E4E2;">
+                        <th scope="col">Date & Time</th>
+                        <th scope="col">Places</th>
+                        <th scope="col">Mode of Transportation</th>
+                        <th scope="col">Flight No.</th>
+                        <th scope="col">Seat No.</th>
+                    </tr>
+                </thead>          
+                <tr>
+                   <td><input type="datetime" name="datetime" /></td>
+                   <td><input type="text" name="places" /></td> 
+                   <td><input type="text" name="transpomode" /></td>
+                   <td><input type="text" name="flightno" /></td> 
+                   <td><input type="text" name="seatno" /></td>
+                   <td><input type="button" value="Delete Row" onclick="SomeDeleteRowFunction(this)"/></td>          
+                 </tr>
+             </table>
+             <input type="submit" class="button" value="Add another line" onclick="addField('tbl');" />
+            <div class="container" style="padding: 20px;">
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <label  class="col-md-3 col-sm-4 col-form-label">Type of Test: </label>
+                            <div class="col-sm-8 col-md-8">
+                                <input type="text" name="" class="form-control" value="Rapid Antigen Test" id="" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <label  class="col-md-4 col-sm-5 col-form-label">Reason for Test: </label>
+                            <div class="col-sm-8 col-md-8">
+                                <input type="text" name="" class="form-control" id="" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <label  class="col-md-4 col-sm-5 col-form-label">Date of Test: </label>
+                            <div class="col-sm-8 col-md-8">
+                                <input type="date" name="" class="form-control" id="" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <label  class="col-md-4 col-sm-5 col-form-label">Test Kit Brand: </label>
+                            <div class="col-sm-8 col-md-8">
+                                <input type="text" name="" class="form-control" id="" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <label  class="col-md-4 col-sm-5 col-form-label">Date Reported: </label>
+                            <div class="col-sm-6 col-md-6">
+                                <input type="date" name="" class="form-control" id="" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container" style="padding: 20px;">
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <label  class="col-md-5 col-sm-6 col-form-label">What are you feeling today? </label>
+                            <div class="col-sm-8 col-md-8">
+                                <input type="radio" id="Fever" name="Fever" value="Fever">
+                                <label for="Fever">Fever</label><br>
+                                <input type="radio" id="Difficulty of Breathing" name="DifficultyOfBreathing" value="Difficulty of Breathing">
+                                <label for="DifficultyOfBreathing">Difficulty of Breathing</label>
+                                <input type="radio" id="Lost of Taste" name="LostofTaste" value="Lost of Taste">
+                                <label for="LostofTaste">Lost of Taste</label><br>
+                                <input type="radio" id="Cough" name="Cough" value="Cough">
+                                <label for="Cough">Cough</label><br>
+                                <input type="radio" id="Diarrhea" name="Diarrhea" value="Diarrhea">
+                                <label for="Diarrhea">Diarrhea</label><br>
+                                <input type="radio" id="Loss of Smell" name="LossofSmell" value="Loss of Smell">
+                                <label for="LossofSmell">Loss of Smell</label><br>
+                                <input type="radio" id="Sore Throat" name="SoreThroat" value="Sore Throat">
+                                <label for="SoreThroat">Sore Throat</label><br>
+                                <input type="radio" id="None" name="None" value="None">
+                                <label for="None">None</label><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Submit">
+        </form>
+    </div>
+    <script>
+        function addField( table ){
+
+        var tableRef = document.getElementById(table);
+        var newRow   = tableRef.insertRow(-1);
+
+        var newCell  = newRow.insertCell(0);
+        var newElem = document.createElement( 'input' );
+        newElem.setAttribute("name", "datetime");
+        newElem.setAttribute("type", "datetime");
+        newCell.appendChild(newElem);
+
+        newCell = newRow.insertCell(1);
+        newElem = document.createElement( 'input' );
+        newElem.setAttribute("name", "places");
+        newElem.setAttribute("type", "text");
+        newCell.appendChild(newElem);
+
+        newCell = newRow.insertCell(2);
+        newElem = document.createElement( 'input' );
+        newElem.setAttribute("name", "transpomode");
+        newElem.setAttribute("type", "text");
+        newCell.appendChild(newElem);
+
+        newCell = newRow.insertCell(3);
+        newElem = document.createElement( 'input' );
+        newElem.setAttribute("name", "flightno");
+        newElem.setAttribute("type", "text");
+        newCell.appendChild(newElem);
+
+        newCell = newRow.insertCell(4);
+        newElem = document.createElement( 'input' );
+        newElem.setAttribute("name", "seatno");
+        newElem.setAttribute("type", "text");
+        newCell.appendChild(newElem);
+
+        newCell = newRow.insertCell(5);
+        newElem = document.createElement( 'input' );
+        newElem.setAttribute("type", "button");
+        newElem.setAttribute("value", "Delete Row");
+        newElem.setAttribute("onclick", 'SomeDeleteRowFunction(this)')
+        newCell.appendChild(newElem);
+        }
+
+
+        window.SomeDeleteRowFunction = function SomeDeleteRowFunction(o) {
+        var p=o.parentNode.parentNode;
+        p.parentNode.removeChild(p);
+        }
+    </script>
+</html>
